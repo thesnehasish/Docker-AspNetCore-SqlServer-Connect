@@ -1,0 +1,244 @@
+/****** CREATE a Database with name MyTestDb ******/
+
+--After creating DB execute following statement
+
+USE [master]
+GO
+
+/****** Object:  Database [MyTestDb]    Script Date: 10-02-2021 23:42:25 ******/
+CREATE DATABASE [MyTestDb]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'MyTestDb', FILENAME = N'/var/opt/mssql/data/MyTestDb.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'MyTestDb_log', FILENAME = N'/var/opt/mssql/data/MyTestDb_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
+
+ALTER DATABASE [MyTestDb] SET COMPATIBILITY_LEVEL = 140
+GO
+
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [MyTestDb].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+
+ALTER DATABASE [MyTestDb] SET ANSI_NULL_DEFAULT OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET ANSI_NULLS OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET ANSI_PADDING OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET ANSI_WARNINGS OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET ARITHABORT OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET AUTO_CLOSE OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET AUTO_SHRINK OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET AUTO_UPDATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [MyTestDb] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET CURSOR_DEFAULT  GLOBAL 
+GO
+
+ALTER DATABASE [MyTestDb] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET NUMERIC_ROUNDABORT OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET QUOTED_IDENTIFIER OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET RECURSIVE_TRIGGERS OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET  DISABLE_BROKER 
+GO
+
+ALTER DATABASE [MyTestDb] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET TRUSTWORTHY OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET PARAMETERIZATION SIMPLE 
+GO
+
+ALTER DATABASE [MyTestDb] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET HONOR_BROKER_PRIORITY OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET RECOVERY FULL 
+GO
+
+ALTER DATABASE [MyTestDb] SET  MULTI_USER 
+GO
+
+ALTER DATABASE [MyTestDb] SET PAGE_VERIFY CHECKSUM  
+GO
+
+ALTER DATABASE [MyTestDb] SET DB_CHAINING OFF 
+GO
+
+ALTER DATABASE [MyTestDb] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+
+ALTER DATABASE [MyTestDb] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+
+ALTER DATABASE [MyTestDb] SET DELAYED_DURABILITY = DISABLED 
+GO
+
+ALTER DATABASE [MyTestDb] SET QUERY_STORE = OFF
+GO
+
+USE [MyTestDb]
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = ON;
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET LEGACY_CARDINALITY_ESTIMATION = PRIMARY;
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 0;
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = PRIMARY;
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = ON;
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET PARAMETER_SNIFFING = PRIMARY;
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
+GO
+
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET QUERY_OPTIMIZER_HOTFIXES = PRIMARY;
+GO
+
+ALTER DATABASE [MyTestDb] SET  READ_WRITE 
+GO
+
+
+-------------------------------------------------------------------------------------------------
+
+
+USE [MyTestDb]
+GO
+
+/****** Object:  Table [dbo].[Temparature]    Script Date: 08-02-2021 15:13:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Temparature](
+	[Date] [date] NULL,
+	[HighestTemp] [decimal](18, 1) NULL,
+	[LowestTemp] [decimal](18, 1) NULL
+) ON [PRIMARY]
+GO
+-------------------------------------------------------------------------------------------------
+CREATE PROCEDURE [dbo].[GetTempByDate] 
+	@Dt Date
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	select * from Temparature t where  t.Date=@Dt
+
+END
+---------------------------------------------------------------------------------------------------------
+GO
+USE [MyTestDb]
+GO
+
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-07' AS Date), CAST(25.1 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-08' AS Date), CAST(21.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-09' AS Date), CAST(27.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-10' AS Date), CAST(22.0 AS Decimal(18, 1)), CAST(10.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-11' AS Date), CAST(28.4 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-12' AS Date), CAST(26.0 AS Decimal(18, 1)), CAST(12.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-13' AS Date), CAST(24.6 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-14' AS Date), CAST(26.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-15' AS Date), CAST(23.1 AS Decimal(18, 1)), CAST(14.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-16' AS Date), CAST(29.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-17' AS Date), CAST(26.0 AS Decimal(18, 1)), CAST(15.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-18' AS Date), CAST(27.0 AS Decimal(18, 1)), CAST(10.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-19' AS Date), CAST(24.3 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-20' AS Date), CAST(27.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-21' AS Date), CAST(27.0 AS Decimal(18, 1)), CAST(10.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-22' AS Date), CAST(28.3 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-23' AS Date), CAST(25.0 AS Decimal(18, 1)), CAST(11.5 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-24' AS Date), CAST(25.9 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-25' AS Date), CAST(25.0 AS Decimal(18, 1)), CAST(10.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-26' AS Date), CAST(25.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-27' AS Date), CAST(25.5 AS Decimal(18, 1)), CAST(12.3 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-28' AS Date), CAST(30.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-29' AS Date), CAST(25.0 AS Decimal(18, 1)), CAST(10.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-30' AS Date), CAST(21.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-01-31' AS Date), CAST(25.0 AS Decimal(18, 1)), CAST(10.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-02-01' AS Date), CAST(22.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-02-02' AS Date), CAST(25.0 AS Decimal(18, 1)), CAST(10.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-02-03' AS Date), CAST(24.7 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+INSERT [dbo].[Temparature] ([Date], [HighestTemp], [LowestTemp]) VALUES (CAST(N'2021-02-04' AS Date), CAST(29.0 AS Decimal(18, 1)), CAST(11.0 AS Decimal(18, 1)))
+GO
+
