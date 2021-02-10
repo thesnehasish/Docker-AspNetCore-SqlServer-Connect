@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Org.Data.AdoExtensions">
+      <HintPath>ExtLib\Org.Data.AdoExtensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

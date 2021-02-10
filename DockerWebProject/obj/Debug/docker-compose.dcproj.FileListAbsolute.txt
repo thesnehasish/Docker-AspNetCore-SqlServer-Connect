@@ -1,0 +1,13 @@
+D:\Docker\DockerWebProject\bin\Debug\DockerWebProject.Views.dll
+D:\Docker\DockerWebProject\bin\Debug\DockerWebProject.Views.pdb
+D:\Docker\DockerWebProject\bin\Debug\appsettings.Development.json
+D:\Docker\DockerWebProject\bin\Debug\appsettings.json
+D:\Docker\DockerWebProject\bin\Debug\DockerWebProject.exe
+D:\Docker\DockerWebProject\bin\Debug\DockerWebProject.dll
+D:\Docker\DockerWebProject\bin\Debug\DbConnect.dll
+D:\Docker\DockerWebProject\bin\Debug\System.Data.SqlClient.dll
+D:\Docker\DockerWebProject\bin\Debug\DockerWebProject.pdb
+D:\Docker\DockerWebProject\bin\Debug\DbConnect.pdb
+D:\Docker\DockerWebProject\obj\Debug\docker-compose.dcprojAssemblyReference.cache
+D:\Docker\DockerWebProject\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
+D:\Docker\DockerWebProject\obj\Debug\docker-compose.dcproj.CopyComplete

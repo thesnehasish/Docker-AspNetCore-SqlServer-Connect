@@ -1,0 +1,8 @@
+D:\Docker\DbConnect\bin\Debug\netstandard2.0\DbConnect.deps.json
+D:\Docker\DbConnect\bin\Debug\netstandard2.0\DbConnect.dll
+D:\Docker\DbConnect\bin\Debug\netstandard2.0\DbConnect.pdb
+D:\Docker\DbConnect\obj\Debug\netstandard2.0\DbConnect.AssemblyInfoInputs.cache
+D:\Docker\DbConnect\obj\Debug\netstandard2.0\DbConnect.AssemblyInfo.cs
+D:\Docker\DbConnect\obj\Debug\netstandard2.0\DbConnect.csproj.CoreCompileInputs.cache
+D:\Docker\DbConnect\obj\Debug\netstandard2.0\DbConnect.dll
+D:\Docker\DbConnect\obj\Debug\netstandard2.0\DbConnect.pdb

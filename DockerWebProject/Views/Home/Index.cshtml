@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+   
+
+    
+    <table width="600px" style="margin-bottom:300px"><tr><td width="40%" height="100px"><b>Choose Historical Date</b></td><td width="30%"><input type="date" id="dateinput" /> </td><td width="30%"><button id="submitbtn" type="submit">Submit</button></td></tr><tr><td><b>Selected date</b> <span id="spanDt"></span> </td><td><b>High Temp</b> <span id="spanHigh"></span></td><td><b>Low Temp</b> <span id="spanLow"></span></td></tr></table>
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Docker Web apps with ASP.NET Core</a>.</p>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#submitbtn").click(function () {
+
+            var date = new Date($('#dateinput').val());
+            var day = date.getDate();
+            var daystr = "";
+            var month = date.getMonth() + 1;
+            var monthstr = "";
+            var year = date.getFullYear();
+            var datev = 0;
+            if (month < 10) {
+                monthstr = "0" + month;
+
+            }
+            else {
+                monthstr = month;
+            }
+
+            if (day < 10) {
+                daystr = "0" + day
+            }
+            else {
+                daystr = day
+            }
+            datev = year + "-" + monthstr + "-" + daystr
+
+            $.get("/Home/GetTemprature?targetDate=" + datev, null, function (data) {
+               
+                if (data.length > 0) {
+                    var dt = new Date(data[0].dt);
+                    var month1 = dt.getMonth() + 1;
+                    var day1 = dt.getDate();
+                    var year1 = dt.getFullYear();
+                    var date1 = day1 + "-" + month1 + "-" + year1;
+                    $("#spanDt").text(date1);
+                    $("#spanHigh").text(data[0].high);
+                    $("#spanLow").text(data[0].low);
+                }
+               
+            });
+        });
+    </script>
+}
