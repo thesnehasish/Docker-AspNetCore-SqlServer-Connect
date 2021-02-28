@@ -1,5 +1,4 @@
 ﻿using DbConnect.DbContext;
-//using Org.Data.AdoExtensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
